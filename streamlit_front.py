@@ -77,7 +77,7 @@ def main():
     
     # Organiza o Nome do Órgão e o Tipo do Órgão em uma nova linha, com o campo de tipo menor
     cols_orgao = st.columns([0.7, 0.3])
-    orgao = cols_orgao[0].text_input("Órgão", "Colegiado do Programa de Pós-Graduação em Engenharia Química")
+    orgao = cols_orgao[0].text_input("Órgão", "")
     tipo_orgao = cols_orgao[1].selectbox("Tipo do Órgão", ["O", "A"], index=0)
     
     st.markdown("---")
