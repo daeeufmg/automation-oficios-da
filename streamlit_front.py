@@ -72,8 +72,8 @@ def main():
     
     # Organiza o número do Ofício e a Data na mesma linha
     cols_oficio_data = st.columns(2)
-    oficio = cols_oficio_data[0].text_input("Número do Ofício", "46/2025")
-    data = cols_oficio_data[1].date_input("Data", value=datetime.date(2025, 6, 4))
+    oficio = cols_oficio_data[0].text_input("Número do Ofício", "XX/XXXX")
+    data = cols_oficio_data[1].date_input("Data", value=datetime.date.today())
     
     # Organiza o Nome do Órgão e o Tipo do Órgão em uma nova linha, com o campo de tipo menor
     cols_orgao = st.columns([0.7, 0.3])
