@@ -90,6 +90,11 @@ def main():
 
     st.markdown("---")
     st.subheader("Gestão de Cadeiras")
+    is_troca = st.checkbox("Troca de Cadeiras?")
+
+    nomes_troca = ""
+    if is_troca:
+        nomes_troca = st.text_area("Nomes dos(as) estudantes envolvidos(as) na troca", placeholder="Ex: João da Silva e Maria Souza")
 
     # Exibir as cadeiras e o botão de deletar
     for i, cadeira in enumerate(st.session_state.cadeiras):
@@ -194,7 +199,9 @@ def main():
             "presidente": presidente,
             "contato_da": contato_da,
             "contato_presidente": contato_presidente,
-            "cadeiras": st.session_state.cadeiras
+            "cadeiras": st.session_state.cadeiras,
+            "is_troca": is_troca,
+            "nomes_troca": nomes_troca
         }
 
         try:

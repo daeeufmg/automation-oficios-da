@@ -33,7 +33,13 @@ def gerar_pdf(config):
     contato_pres = config.get("contato_presidente")
     cadeiras = config.get("cadeiras", [])
     corpo_adicional = config.get("corpo_adicional", "")
+    is_troca = config.get("is_troca", False)
+    texto_troca = ""
+    if is_troca:
+        nomes = config.get("nomes_troca", "")
+        texto_troca = f"Conforme os documentos de renúncia em anexo dos(as) membros(as) {nomes}, "
 
+    
     # Define preposição conforme tipo
     preposicao = "na" if tipo_orgao == "A" else "no "
     assunto = f"Assunto: Nomeação de Representantes Discentes {preposicao} {orgao}"
@@ -123,7 +129,7 @@ def gerar_pdf(config):
         devidamente cientificada ao Diretor da Unidade,\
         ", normal),
         space(body_spacing),
-        Paragraph("O DA EEUFMG indica e solicita a nomeação, a partir da presente data e com\
+        Paragraph(f"{texto_troca}O DA EEUFMG indica e solicita a nomeação, a partir da presente data e com\
         mandato de 1 ano ou até o registro de nova ata de eleição e posse comunicada ao\
         Diretor, dos discentes abaixo listados como representantes discentes para composição\
         do órgão colegiado citado.", normal),
@@ -136,6 +142,9 @@ def gerar_pdf(config):
 
     # Itera sobre cada cadeira
     for idx, cadeira in enumerate(cadeiras, start=1):
+        if not cadeira:
+            continue
+
         titular = cadeira.get("titular", {})
         suplente = cadeira.get("suplente", {})
 
