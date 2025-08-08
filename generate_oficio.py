@@ -7,6 +7,16 @@ from reportlab.lib.units import cm
 from reportlab.platypus import Image
 from reportlab.lib import utils
 from reportlab.lib.enums import TA_JUSTIFY
+from datetime import datetime, date
+import locale
+
+try:
+    locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
+except locale.Error:
+    try:
+        locale.setlocale(locale.LC_TIME, 'pt_BR')  # alternativa para Windows
+    except locale.Error:
+        print("⚠️ Locale pt_BR não está disponível no sistema. Os meses podem aparecer em inglês.")
 
 def validar_representante(tipo, dados, cadeira_num):
     campos_obrigatorios = ["nome", "matricula", "curso", "email", "email_ufmg", "telefone"]
@@ -22,10 +32,23 @@ def get_image(path, width=5*cm):
     aspect = ih / float(iw)
     return Image(path, width=width, height=(width * aspect), hAlign='CENTER')
 
+
+
 def gerar_pdf(config):
     # Extrai dados principais
     oficio = config.get("oficio")
     data = config.get("data")
+
+    if isinstance(data, (datetime, date)):
+        data = data.strftime("%d de %B de %Y")
+    elif isinstance(data, str):
+        try:
+            data = datetime.strptime(data, "%Y-%m-%d").strftime("%d de %B de %Y")
+        except ValueError:
+            pass
+    else:
+        raise ValueError("Formato de data inválido.")
+
     orgao = config.get("orgao")
     tipo_orgao = config.get("tipo_orgao", "O").upper()
     presidente = config.get("presidente")
