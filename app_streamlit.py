@@ -1,6 +1,6 @@
 import streamlit as st
 import datetime
-from generate_oficio import gerar_pdf
+from pdf_generator import gerar_pdf
 
 def main():
     st.title("Gerador de Ofício DAEE - UFMG")

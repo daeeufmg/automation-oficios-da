@@ -6,7 +6,7 @@ from utils import get_image
 import os
 
 body_spacing = 0.3
-logo = get_image(os.path.join("static","logo_da.png"), width=9*cm)
+logo = get_image(os.path.join("assets","logo_da.png"), width=9*cm)
 
 # Estilos
 styles = getSampleStyleSheet()
